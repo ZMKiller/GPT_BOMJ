@@ -39,11 +39,13 @@ export default abstract class LocationScene extends Phaser.Scene {
     if (this.location.bgKey && !isImageMissing(this.location.bgKey)) {
       this.add.image(400, 300, this.location.bgKey).setOrigin(0.5);
     } else {
+
       // fallback: plain rectangle and centered label when texture is missing
       this.add.rectangle(0, 0, 800, 600, 0x444444).setOrigin(0);
       this.add.text(400, 300, this.location.name, { color: '#ffffff' }).setOrigin(0.5);
     }
     // top title always visible
+
     this.add.text(400, 40, this.location.name, { color: '#ffffff' }).setOrigin(0.5, 0);
   }
 
