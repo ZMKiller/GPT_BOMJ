@@ -1,32 +1,38 @@
 import Phaser from 'phaser';
+import locationsData from '../data/locations.json';
+import { LocationDef, LocationId } from '../util/types';
 
-interface LocationButton {
-  label: string;
-  sceneKey: string;
-  x: number;
-  y: number;
-}
+const locs: LocationDef[] = locationsData as any;
+
+const sceneMap: Record<string, string> = {
+  downtown: 'DowntownScene',
+  park: 'ParkScene',
+  shelter: 'ShelterScene',
+  jobcenter: 'JobCenterScene',
+  market: 'MarketScene'
+};
 
 export default class CityMapScene extends Phaser.Scene {
+  private info!: Phaser.GameObjects.Text;
   constructor() {
     super({ key: 'CityMapScene' });
   }
 
   create(): void {
-    const locations: LocationButton[] = [
-      { label: 'Downtown', sceneKey: 'DowntownScene', x: 100, y: 100 },
-      { label: 'Park', sceneKey: 'ParkScene', x: 300, y: 100 },
-      { label: 'Shelter', sceneKey: 'ShelterScene', x: 500, y: 100 },
-      { label: 'Job Center', sceneKey: 'JobCenterScene', x: 200, y: 250 },
-      { label: 'Market', sceneKey: 'MarketScene', x: 400, y: 250 }
-    ];
+    this.info = this.add.text(10, 570, '', { color: '#ffff00' });
 
-    locations.forEach(loc => {
-      const text = this.add.text(loc.x, loc.y, loc.label, { color: '#ffffff' })
+    locs.forEach((loc, index) => {
+      const x = 100 + index * 120;
+      const y = 150;
+      const text = this.add.text(x, y, loc.name, { color: '#ffffff' })
         .setInteractive({ useHandCursor: true })
         .setOrigin(0.5);
+      text.on('pointerover', () => {
+        this.info.setText(`Риск полиции: ${loc.policeRisk}`);
+      });
+      text.on('pointerout', () => this.info.setText(''));
       text.on('pointerup', () => {
-        this.scene.start(loc.sceneKey);
+        this.scene.start(sceneMap[loc.id]);
       });
     });
   }

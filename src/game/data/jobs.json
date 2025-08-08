@@ -1,3 +1,36 @@
 [
-  { "id": "job1", "title": "Odd Job" }
+  {
+    "id": "cleaner",
+    "title": "Уборщик",
+    "wagePerHour": 50,
+    "req": {"skills": {"diligence": 2}},
+    "shifts": [{"start": 8, "end": 12, "fatigue": 20}]
+  },
+  {
+    "id": "courier",
+    "title": "Курьер",
+    "wagePerHour": 80,
+    "req": {"skills": {"persistence": 3}},
+    "shifts": [{"start": 9, "end": 17, "fatigue": 40}]
+  },
+  {
+    "id": "guard",
+    "title": "Охранник",
+    "wagePerHour": 70,
+    "req": {"skills": {"survival": 2}},
+    "shifts": [{"start": 22, "end": 6, "fatigue": 50}]
+  },
+  {
+    "id": "loader",
+    "title": "Грузчик",
+    "wagePerHour": 60,
+    "req": {"skills": {"persistence": 2, "diligence": 2}},
+    "shifts": [{"start": 10, "end": 18, "fatigue": 60}]
+  },
+  {
+    "id": "janitor",
+    "title": "Дворник",
+    "wagePerHour": 55,
+    "shifts": [{"start": 5, "end": 9, "fatigue": 25}]
+  }
 ]

@@ -1,8 +1,9 @@
 import LocationScene from '../LocationScene';
+import { LocationId } from '../../util/types';
 
 export default class JobCenterScene extends LocationScene {
   constructor() {
-    super('JobCenterScene');
+    super('JobCenterScene', LocationId.JobCenter);
   }
 
   create(): void {

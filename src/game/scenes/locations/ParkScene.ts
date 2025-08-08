@@ -1,8 +1,9 @@
 import LocationScene from '../LocationScene';
+import { LocationId } from '../../util/types';
 
 export default class ParkScene extends LocationScene {
   constructor() {
-    super('ParkScene');
+    super('ParkScene', LocationId.Park);
   }
 
   create(): void {

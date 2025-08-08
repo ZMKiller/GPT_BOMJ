@@ -1,3 +1,29 @@
 [
-  { "id": "npc1", "name": "Bob", "archetype": "generic" }
+  {
+    "id": "kind",
+    "baseDonateChance": 0.5,
+    "donateRange": [5, 20],
+    "modifiers": {
+      "timeOfDay": {"day": 0.1, "night": -0.1},
+      "hygieneThresholds": [{"lt": 30, "mod": -0.1}]
+    }
+  },
+  {
+    "id": "stingy",
+    "baseDonateChance": 0.2,
+    "donateRange": [1, 5],
+    "modifiers": {"location": {"market": 0.05}}
+  },
+  {
+    "id": "busy",
+    "baseDonateChance": 0.15,
+    "donateRange": [1, 10],
+    "modifiers": {"timeOfDay": {"day": -0.05}}
+  },
+  {
+    "id": "tourist",
+    "baseDonateChance": 0.35,
+    "donateRange": [10, 40],
+    "modifiers": {"location": {"park": 0.1, "market": 0.1}}
+  }
 ]
