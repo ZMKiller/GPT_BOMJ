@@ -1,44 +1,69 @@
 import Phaser from 'phaser';
 import { Systems } from './BootScene';
-import { StatId } from '../util/types';
+import HUD from '../ui/HUD';
 
 export default class UIScene extends Phaser.Scene {
   private systems!: Systems;
-  private moneyText!: Phaser.GameObjects.Text;
-  private timeText!: Phaser.GameObjects.Text;
-  private statsText!: Phaser.GameObjects.Text;
+  private hud!: HUD;
 
   constructor() {
     super({ key: 'UIScene' });
   }
 
   create(): void {
-    const { width } = this.scale;
-    this.add.rectangle(0, 0, width, 50, 0x000000, 0.5).setOrigin(0);
     this.systems = this.game.registry.get('systems') as Systems;
-
-    this.moneyText = this.add.text(10, 10, '', { color: '#ffffff' });
-    this.timeText = this.add.text(150, 10, '', { color: '#ffffff' });
-    this.statsText = this.add.text(10, 30, '', { color: '#ffffff' });
+    this.hud = new HUD(this, this.systems);
     this.scene.bringToTop();
 
-    this.refresh();
-    this.systems.stats.on('changed', () => this.refresh());
-    this.systems.economy.on('cash', () => this.refresh());
-    this.systems.time.onTick(1, () => this.refresh());
-    this.game.events.on('toast', (msg: string) => this.showToast(msg));
+    // refresh HUD periodically
+    this.systems.stats.on('changed', () => this.hud.refresh());
+    this.systems.economy.on('cash', () => this.hud.refresh());
+    this.systems.time.onTick(1, () => this.hud.refresh());
+    this.game.events.on('toast', (msg: string) => this.hud.toast(msg));
+
+    // mobile action button
+    const begBtn = this.add.text(this.scale.width - 60, this.scale.height - 60, 'Попросить', {
+      color: '#ffffff',
+      backgroundColor: '#000000'
+    })
+      .setPadding(10)
+      .setOrigin(1, 1)
+      .setInteractive({ useHandCursor: true });
+    begBtn.on('pointerdown', () => {
+      this.game.events.emit('action', 'beg');
+      this.systems.audio.click();
+    });
+
+    // virtual joystick
+    const stickBase = this.add.circle(80, this.scale.height - 80, 40, 0x000000, 0.3).setInteractive();
+    const stick = this.add.circle(80, this.scale.height - 80, 20, 0xffffff, 0.5).setInteractive();
+    let stickPointer: Phaser.Input.Pointer | null = null;
+    stickBase.on('pointerdown', (p: Phaser.Input.Pointer) => {
+      stickPointer = p;
+      stick.setPosition(p.x, p.y);
+    });
+    this.input.on('pointermove', p => {
+      if (stickPointer && p.id === stickPointer.id) {
+        stick.setPosition(p.x, p.y);
+        this.game.events.emit('move', { x: p.x - stickBase.x, y: p.y - stickBase.y });
+      }
+    });
+    this.input.on('pointerup', p => {
+      if (stickPointer && p.id === stickPointer.id) {
+        stickPointer = null;
+        stick.setPosition(stickBase.x, stickBase.y);
+        this.game.events.emit('move', { x: 0, y: 0 });
+      }
+    });
   }
 
-  private refresh(): void {
-    const now = this.systems.time.now();
-    this.moneyText.setText(`деньги: ${this.systems.economy.cash}`);
-    this.timeText.setText(`день ${now.day} ${now.hour.toString().padStart(2, '0')}:${now.minute.toString().padStart(2, '0')}`);
-    const s = this.systems.stats.get() as Record<StatId, number>;
-    this.statsText.setText(`hp:${s.health} hu:${s.hunger} en:${s.energy} mood:${s.mood} hyg:${s.hygiene}`);
+  update(): void {
+    // show fps in dev mode
+    if (!this.debugText) {
+      this.debugText = this.add.text(10, this.scale.height - 20, '', { color: '#ffffff' });
+    }
+    this.debugText.setText(`fps:${Math.floor(this.game.loop.actualFps)}`);
   }
 
-  private showToast(msg: string): void {
-    const t = this.add.text(400, 560, msg, { color: '#ffff00' }).setOrigin(0.5);
-    this.tweens.add({ targets: t, y: 520, alpha: 0, duration: 2000, onComplete: () => t.destroy() });
-  }
+  private debugText?: Phaser.GameObjects.Text;
 }

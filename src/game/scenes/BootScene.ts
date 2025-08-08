@@ -9,6 +9,7 @@ import EventSystem from '../systems/EventSystem';
 import SaveSystem from '../systems/SaveSystem';
 import NPCSystem from '../systems/NPCSystem';
 import JobSystem from '../systems/JobSystem';
+import AudioManager from '../util/audio';
 
 export interface Systems {
   time: TimeSystem;
@@ -20,6 +21,7 @@ export interface Systems {
   save: SaveSystem;
   npc: NPCSystem;
   jobs: JobSystem;
+  audio: AudioManager;
   state: GameState;
 }
 
@@ -68,8 +70,10 @@ export default class BootScene extends Phaser.Scene {
     const npc = new NPCSystem();
     const jobs = new JobSystem(skills, economy, stats);
     const save = new SaveSystem(state, time);
+    const audio = new AudioManager();
+    audio.startMusic();
 
-    const systems: Systems = { time, stats, skills, economy, inventory, events, save, npc, jobs, state };
+    const systems: Systems = { time, stats, skills, economy, inventory, events, save, npc, jobs, audio, state };
     this.game.registry.set('systems', systems);
 
     time.onTick(60, () => {

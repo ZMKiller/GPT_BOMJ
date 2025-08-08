@@ -22,16 +22,16 @@ export default class CityMapScene extends Phaser.Scene {
     this.info = this.add.text(10, 570, '', { color: '#ffff00' });
 
     locs.forEach((loc, index) => {
-      const x = 100 + index * 120;
+      const x = 100 + index * 140;
       const y = 150;
-      const text = this.add.text(x, y, loc.name, { color: '#ffffff' })
-        .setInteractive({ useHandCursor: true })
-        .setOrigin(0.5);
-      text.on('pointerover', () => {
-        this.info.setText(`Риск полиции: ${loc.policeRisk}`);
+      const icon = this.add.image(x, y, 'player_idle').setDisplaySize(48, 48).setInteractive({ useHandCursor: true });
+      const text = this.add.text(x, y + 40, loc.name, { color: '#ffffff' }).setOrigin(0.5);
+      icon.on('pointerover', () => {
+        const hours = loc.openHours ? `${loc.openHours.start}-${loc.openHours.end}` : 'круглосуточно';
+        this.info.setText(`трафик:${loc.spawn.density} полиция:${loc.policeRisk} время:${hours}`);
       });
-      text.on('pointerout', () => this.info.setText(''));
-      text.on('pointerup', () => {
+      icon.on('pointerout', () => this.info.setText(''));
+      icon.on('pointerup', () => {
         this.scene.start(sceneMap[loc.id]);
       });
     });
