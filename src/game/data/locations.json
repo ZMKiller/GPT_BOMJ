@@ -1,0 +1,43 @@
+[
+  {
+    "id": "downtown",
+    "name": "Центр",
+    "bgKey": "bg_downtown",
+    "actions": ["beg", "collect", "shop"],
+    "policeRisk": 0.2,
+    "spawn": {"npcTypes": ["kind", "busy", "stingy"], "density": 1}
+  },
+  {
+    "id": "park",
+    "name": "Парк",
+    "bgKey": "bg_park",
+    "actions": ["beg", "rest", "collect"],
+    "policeRisk": 0.1,
+    "spawn": {"npcTypes": ["kind", "tourist"], "density": 0.8}
+  },
+  {
+    "id": "shelter",
+    "name": "Приют",
+    "bgKey": "bg_shelter",
+    "actions": ["rest", "wash", "shop"],
+    "policeRisk": 0.05,
+    "spawn": {"npcTypes": ["kind"], "density": 0.5},
+    "openHours": {"start": 8, "end": 22}
+  },
+  {
+    "id": "jobcenter",
+    "name": "Биржа труда",
+    "bgKey": "bg_jobcenter",
+    "actions": ["beg", "interview"],
+    "policeRisk": 0.3,
+    "spawn": {"npcTypes": ["busy"], "density": 0.7}
+  },
+  {
+    "id": "market",
+    "name": "Рынок",
+    "bgKey": "bg_market",
+    "actions": ["beg", "shop"],
+    "policeRisk": 0.25,
+    "spawn": {"npcTypes": ["stingy", "busy", "tourist"], "density": 1.2}
+  }
+]
