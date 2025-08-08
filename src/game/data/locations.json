@@ -1,0 +1,7 @@
+[
+  { "id": "downtown", "name": "Downtown" },
+  { "id": "park", "name": "Park" },
+  { "id": "shelter", "name": "Shelter" },
+  { "id": "jobcenter", "name": "Job Center" },
+  { "id": "market", "name": "Market" }
+]

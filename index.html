@@ -2,33 +2,13 @@
 <html lang="ru">
 <head>
 
-  <meta charset="UTF-8">
-  <title>Симулятор Бомжа</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Симулятор бомжа</title>
 </head>
 <body>
-  <div id="game">
-    <canvas id="gameCanvas"></canvas>
-
-    <div id="stats">
-      <p>Деньги: <span id="money">0</span> ₽</p>
-      <p>Еда: <span id="food">100</span>%</p>
-      <p>Настроение: <span id="mood">100</span>%</p>
-      <p>Здоровье: <span id="health">100</span>%</p>
-      <p>Энергия: <span id="energy">100</span>%</p>
-      <p>День: <span id="day">1</span></p>
-    </div>
-
-    <div id="actions">
-      <button id="buyFood">Купить еду (10 ₽)</button>
-      <button id="rest">Отдохнуть</button>
-      <button id="buyGuitar">Купить гитару (50 ₽)</button>
-      <button id="playMusic" disabled>Играть музыку</button>
-      <button id="startBusiness" disabled>Открыть бизнес (1000 ₽)</button>
-    </div>
-  </div>
-
-  <script src="game.js"></script>
+  <canvas id="game-canvas"></canvas>
+  <script type="module" src="/src/main.ts"></script>
 
 </body>
 </html>
