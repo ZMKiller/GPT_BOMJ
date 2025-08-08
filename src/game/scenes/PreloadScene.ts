@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { loadImageSafe } from '../util/assetLoader';
+import { imageAssets, preloadImages } from '../../assets/assetManifest';
 
 /** Preloads minimal generated textures/audio and shows a short tutorial. */
 export default class PreloadScene extends Phaser.Scene {
@@ -54,6 +56,9 @@ export default class PreloadScene extends Phaser.Scene {
     });
 
     // --- AUDIO --- (generated via WebAudio later)
+
+    // Load location backgrounds via manifest
+    preloadImages.forEach(key => loadImageSafe(this, key, imageAssets[key]));
   }
 
   create(): void {

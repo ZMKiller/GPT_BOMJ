@@ -3,6 +3,7 @@ import locations from '../data/locations.json';
 import { LocationDef, LocationId } from '../util/types';
 import { Systems } from './BootScene';
 import Panels from '../ui/Panels';
+import { isImageMissing } from '../util/assetLoader';
 
 const locDefs: Record<string, LocationDef> = {} as any;
 (locations as LocationDef[]).forEach(l => (locDefs[l.id] = l));
@@ -35,6 +36,13 @@ export default abstract class LocationScene extends Phaser.Scene {
 
   protected enter(): void {
     console.log(`${this.scene.key} enter`);
+    if (this.location.bgKey && !isImageMissing(this.location.bgKey)) {
+      this.add.image(400, 300, this.location.bgKey).setOrigin(0.5);
+    } else {
+      const rect = this.add.rectangle(0, 0, 800, 600, 0x444444).setOrigin(0);
+      this.add.text(400, 300, this.location.name, { color: '#ffffff' }).setOrigin(0.5);
+    }
+    this.add.text(400, 40, this.location.name, { color: '#ffffff' }).setOrigin(0.5, 0);
   }
 
   protected exit(): void {

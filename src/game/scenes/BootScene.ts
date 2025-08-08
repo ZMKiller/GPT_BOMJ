@@ -10,6 +10,8 @@ import SaveSystem from '../systems/SaveSystem';
 import NPCSystem from '../systems/NPCSystem';
 import JobSystem from '../systems/JobSystem';
 import AudioManager from '../util/audio';
+import { loadImageSafe } from '../util/assetLoader';
+import { imageAssets, bootImages } from '../../assets/assetManifest';
 
 export interface Systems {
   time: TimeSystem;
@@ -31,7 +33,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('placeholder', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==');
+    bootImages.forEach(key => loadImageSafe(this, key, imageAssets[key]));
   }
 
   create(): void {
