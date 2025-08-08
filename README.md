@@ -1,5 +1,6 @@
 # GPT_BOMJ
 
+
 Базовый каркас 2D-игры «Симулятор бомжа», созданной на TypeScript, Vite и Phaser 3.
 
 ## Запуск
@@ -21,3 +22,4 @@ npm run dev
 ```
 npm test
 ```
+
