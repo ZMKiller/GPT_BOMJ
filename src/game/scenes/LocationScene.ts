@@ -61,9 +61,15 @@ export default abstract class LocationScene extends Phaser.Scene {
     this.anims.create({ key: 'walk', frames: [{ key: 'player_walk' }, { key: 'player_idle' }], frameRate: 4, repeat: -1 });
     this.player.play('idle');
 
-    // rain particles for ambiance
-    const rain = this.add.particles('raindrop');
-    rain.createEmitter({ x: { min: 0, max: 800 }, y: 0, lifespan: 2000, speedY: 300, quantity: 8, scale: { start: 1, end: 1 } });
+    // rain particles for ambiance (new factory API)
+    this.add.particles(0, 0, 'raindrop', {
+      x: { min: 0, max: 800 },
+      y: 0,
+      lifespan: 2000,
+      speedY: 300,
+      quantity: 8,
+      scale: { start: 1, end: 1 }
+    });
     this.systems.time.onTick(5, () => this.systems.stats.modify({ mood: -1 }));
 
     this.panels = new Panels(this, this.systems);

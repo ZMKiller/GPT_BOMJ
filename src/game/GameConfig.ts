@@ -10,14 +10,13 @@ import ShelterScene from './scenes/locations/ShelterScene';
 import JobCenterScene from './scenes/locations/JobCenterScene';
 import MarketScene from './scenes/locations/MarketScene';
 
-const canvas = document.getElementById('game-canvas') as HTMLCanvasElement;
-
 export const GameConfig: Phaser.Types.Core.GameConfig = {
+  // explicit render type to avoid custom-environment warnings
   type: Phaser.AUTO,
+  parent: 'game-root',
   width: 800,
   height: 600,
   backgroundColor: '#2d2d2d',
-  canvas,
   scene: [
     BootScene,
     PreloadScene,

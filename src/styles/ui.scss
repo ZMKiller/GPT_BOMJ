@@ -4,9 +4,14 @@ html, body {
   height: 100%;
 }
 
-#game-canvas {
+#game-root {
   width: 100vw;
   height: 100vh;
-  display: block;
   touch-action: none; // allow joystick
+}
+
+#game-root canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
