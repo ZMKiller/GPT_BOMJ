@@ -1,0 +1,8 @@
+[
+  { "id": "water", "name": "Бутылка воды", "type": "drink", "price": 5, "effects": {"hunger": -2, "hygiene": 1} },
+  { "id": "burger", "name": "Бургер", "type": "food", "price": 15, "effects": {"hunger": -20, "mood": 2} },
+  { "id": "coffee", "name": "Кофе", "type": "drink", "price": 12, "effects": {"energy": 15, "hunger": -5, "mood": 5} },
+  { "id": "cigarettes", "name": "Сигареты", "type": "tool", "price": 10, "effects": {"mood": 10, "health": -2} },
+  { "id": "jacket", "name": "Куртка", "type": "clothes", "price": 100, "effects": {"hygiene": 5} },
+  { "id": "guitar", "name": "Гитара", "type": "tool", "price": 250, "req": {"skill": {"charm": 2}}, "effects": {"mood": 10} }
+]
