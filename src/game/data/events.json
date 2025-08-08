@@ -1,0 +1,32 @@
+[
+  {
+    "id": "police",
+    "when": {"chance": 0.05},
+    "text": "Полиция проверила документы. Штраф 50₽.",
+    "options": [{"id": "ok", "label": "Ох", "effects": {"money": -50}}]
+  },
+  {
+    "id": "kind_lunch",
+    "when": {"location": ["downtown", "park"], "chance": 0.1},
+    "text": "Прохожий купил вам обед.",
+    "options": [{"id": "eat", "label": "Спасибо", "effects": {"stats": {"hunger": -30, "mood": 10}}}]
+  },
+  {
+    "id": "rain",
+    "when": {"time": ["day", "night"], "chance": 0.08},
+    "text": "Пошёл дождь.",
+    "options": [{"id": "wet", "label": "Промокнуть", "effects": {"stats": {"mood": -10, "hygiene": -5}}}]
+  },
+  {
+    "id": "pickpocket",
+    "when": {"location": ["market", "downtown"], "chance": 0.04},
+    "text": "Карманник стащил немного денег.",
+    "options": [{"id": "damn", "label": "Чёрт", "effects": {"money": -20}}]
+  },
+  {
+    "id": "lucky_day",
+    "when": {"chance": 0.02},
+    "text": "Удачный день!",
+    "options": [{"id": "yay", "label": "Ура", "effects": {"money": 100, "stats": {"mood": 20}}}]
+  }
+]
